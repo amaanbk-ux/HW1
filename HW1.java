@@ -87,8 +87,24 @@ public class HW1 {
          */
         public void removeElementsLT ( int ltValue ) {
 
-            // YOUR CODE GOES HERE
-
+            while (this.head != null && head.data < ltValue) {
+                head = head.next; //if the head is less than ltValue then remove head
+           
+            }
+           
+            Node current = this.head; //make current node head of insertion
+            
+            while (current != null && current.next != null) {
+                if (current.next.data < ltValue) {
+                    current.next = current.next.next; //move to next element if less than ltValue
+                
+                } else {
+                    current = current.next; //current becomes next element
+               
+                }
+           
+            }
+           
             return;
         }
 
@@ -100,8 +116,25 @@ public class HW1 {
 
         public void removeElement ( int value ) {
 
-            // YOUR CODE GOES HERE
-
+            // same structure as removeElementLT except the data point must equal the value removed
+            while (this.head != null && head.data == value) {
+                head = head.next;
+           
+            }
+           
+            Node current = this.head;
+          
+            while (current != null && current.next != null) {
+                if (current.next.data == value) {
+                    current.next = current.next.next;
+          
+                } else {
+                    current = current.next;
+          
+                }
+          
+            }
+            
             return;
         }
 
@@ -159,9 +192,18 @@ public class HW1 {
 
             Stack<Character> stack = new Stack<>();
             input = input.toLowerCase().replaceAll("\\s+", "");
-
-            // Your CODE GOES HERE
-            return false;
+            // puts every character in word in an array to be stacked
+            for (char c : input.toCharArray()) {
+                stack.push(c);
+            }
+            
+            for (char c : input.toCharArray()) {
+                if (stack.isEmpty() || c != stack.pop()) { //reads stack and pop to determine if plaindrome
+                    return false;
+                }
+                
+            }
+            return stack.isEmpty();
         }
 
 
@@ -181,9 +223,32 @@ public class HW1 {
          * completed, place them all back in teh original stack.
          */
         public static int findLargestK(Stack<Integer> stack, int k) {
+            //temporary stack
+            Stack<Integer> temp = new Stack<>();
+            //index
+            int index = -1;
 
-            // YOUR CODE GOES HERE
-            return -1;
+            int currentIndex = stack.size() -1;
+
+            while (!stack.isEmpty()){
+                int e = stack.pop(); //pop every element and push into temp
+                temp.push(e);
+                
+                //go through every element 
+                if (e == k && currentIndex > index){
+                    index = currentIndex;
+                }
+                currentIndex--;
+            }
+
+            while(!temp.isEmpty()){
+                stack.push(temp.pop()); //push elements back from temp
+            }
+
+
+
+            
+            return index;
         }
 
     }  // End class Stacks
@@ -219,7 +284,7 @@ public class HW1 {
         */
 
         // RETURN THE CORRECT OPTION NUMBER LISTED ABOVE
-        return -1;
+        return 3;
     }
 
 
@@ -240,8 +305,7 @@ public class HW1 {
          */
 
         // RETURN THE CORRECT OPTION LISTED ABOVE
-        return -1;
+        return 2;
     }
 
 }
-
